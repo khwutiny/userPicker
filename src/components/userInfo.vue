@@ -5,7 +5,7 @@
       <div class="display-flex line flex-end">
         <span class="info-id">昵称</span>
         <input class="info-content" v-model="nickName"/>
-        <span class="text-right"><em>></em></span>
+        <span class="text-right"><em></em></span>
       </div>
       <div @click="pickerShow('birth')" class="display-flex line  flex-end">
         <span class="info-id">生日</span>
