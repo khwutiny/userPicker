@@ -1,6 +1,6 @@
 <template>
   <div>
-    <pd-select-box style="position: fixed;bottom: 0;width: 100%">
+    <pd-select-box style="position: absolute;bottom: 0;width: 100%">
       <pd-select-item v-for="(el,index) in currentList" :key="index" :listData="Array.from(dataMap[el].List)"  v-model="dataView[el].value"  type="wheel"></pd-select-item>
     </pd-select-box>
   </div>
