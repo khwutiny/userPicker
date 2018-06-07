@@ -16,7 +16,7 @@
       <div @click="pickerShow('height')" class="display-flex line  flex-end">
         <span class="info-id">身高</span>
         <span class="info-content" v-if="dataView['height'].value">{{dataView['height'].value}}厘米</span>
-        <span class="info-content" v-else>身高</span>
+        <span class="info-content text-right" v-else>身高</span>
         <span class="text-right"><em>></em></span>
 
       </div>
