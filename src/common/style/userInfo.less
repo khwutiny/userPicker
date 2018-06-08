@@ -1,53 +1,41 @@
 @import "iconfont.less";
+.container{
+  width:100%;
+  background-image: linear-gradient(to left, #b4e2ff 10%, #fff 60%); /* 标准的语法（必须放在最后） */
+}
 .head{
+  width:100%;
   position: absolute;
   top:0;
-  font-size:1.5rem;
-  line-height:2.5rem;
-  text-align:center;
-  width:100%;
   color:#f5f0f1;
   background:#8e8b8b;
-}
-input {
-  border: none;
-  background: none;
-}
-.container {
-  width:100%;
-  margin-top:20px;
-  padding: 20px;
-}
-.container li{
-  border-bottom:1px #d4d2d2 solid;
-  padding: 26px 10px;
-}
-.display-flex {
-  display: flex;
-}
-.flex-end{
-  justify-content: space-between;
-}
-.display-flex input{
-  flex:1;
-  width:0;
-  padding-left:9px;
-}
-.line {
+  text-align:center;
   font-size: 1.5rem;
-  padding: 8px 28px;
-  border-bottom:1px solid #dcdada;
+  line-height: 2.5rem;
 }
-.line [class^="icon-"]{
-  font-size:1.75rem;
-}
-.line input{
-  line-height: 1rem;
-  font-size: 1.25rem;
+.container ul{
+  margin-top: 40px;
 }
 
-.line span{
-  padding: 0 10px;
+.line{
+  display: flex;
+  border-bottom:1px #d4d2d2 solid;
+  font-size: 1.5rem;
+  padding: 8px 28px;
+}
+
+.line [class^="icon-"], .add-logo {
+  font-size: 1.75rem;
+  padding: 7px 10px;
+}
+
+.user-content,.add-text{
+  padding: 7px 10px;
+}
+
+.line input {
+  border: none;
+  background: none;
 }
 
 .line .info-id{
@@ -71,30 +59,18 @@ input {
   height:100vh;
   opacity: 0.5;
 }
-span.add{
-  font-size:1.5rem;
-  margin-left:5px;
-  padding: 6px;
-  border:1px solid black;
-  border-radius:50%;
-}
-span.add-text{
-  line-height:1.6rem;
-  padding: 0 20px;
-}
+
 
 .bg{
   background-image: linear-gradient(to left, #b4e2ff 10%, #fff 60%); /* 标准的语法（必须放在最后） */
 }
 
-.text-right{
+.info-logo{
   flex:0;
   color:#c3c3c3;
   width:1.5rem;
   font-size:1rem !important;
   line-height:2rem;
-}
-.text-right em{
   margin-left:5px;
 }
 .footer{

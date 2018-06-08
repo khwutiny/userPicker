@@ -1,32 +1,32 @@
 <template>
-  <div>
+  <div class="container">
     <div class="head">编辑信息</div>
-    <div class="container bg">
-      <div class="display-flex line flex-end">
+    <ul>
+      <li class="line">
         <span class="info-id">昵称</span>
         <input class="info-content" v-model="nickName"/>
-        <span class="text-right"><em></em></span>
-      </div>
-      <div @click="pickerShow('birth')" class="display-flex line  flex-end">
+        <span class="info-logo"><em style="visibility: hidden">></em></span>
+      </li>
+      <li @click="pickerShow('birth')" class="line">
         <span class="info-id">生日</span>
         <span class="info-content" v-if="dataView['year'].value">{{dataView['year'].value}}.{{dataView['month'].value}}.{{dataView['day'].value}}</span>
-        <span class="info-content text-right" v-else>生日</span>
-        <span class="text-right"><em>></em></span>
-      </div>
-      <div @click="pickerShow('height')" class="display-flex line  flex-end">
+        <span class="info-content" v-else>生日</span>
+        <span class="info-logo"><em>></em></span>
+      </li>
+      <li @click="pickerShow('height')" class="line">
         <span class="info-id">身高</span>
         <span class="info-content" v-if="dataView['height'].value">{{dataView['height'].value}}厘米</span>
-        <span class="info-content text-right" v-else>身高</span>
-        <span class="text-right"><em>></em></span>
+        <span class="info-content" v-else>身高</span>
+        <span class="info-logo"><em>></em></span>
 
-      </div>
-      <div @click="pickerShow('weight')" class="display-flex line  flex-end">
+      </li>
+      <li @click="pickerShow('weight')" class="line">
         <span class="info-id">体重</span>
         <span class="info-content" v-if="dataView['weight'].value">{{dataView['weight'].value}}公斤</span>
-        <span class="info-content text-right" v-else>体重</span>
-        <span class="text-right"><em>></em></span>
-      </div>
-    </div>
+        <span class="info-content" v-else>体重</span>
+        <span class="info-logo"><em>></em></span>
+      </li>
+    </ul>
     <footer class="footer" @click="setInfoById">保存</footer>
     <footer  v-show='isTimePickerShow'>
       <div class="empty" @click="pickerHide"></div>

@@ -1,14 +1,14 @@
 <template>
-  <div>
+  <div class="container">
   <div class="head">选择角色</div>
-  <ul class="container bg">
-      <li v-for="user in users" :key="user.user_id" class="display-flex line" @click="toInfo(user)">
+  <ul>
+      <li v-for="user in users" :key="user.user_id" class="line" @click="toInfo(user)">
         <span v-if="user.sex == 0" class="icon-nvtouxiang"></span>
         <span v-else-if="user.sex == 1" class="icon-nantouxiang"></span>
-        <span>{{user.user_name}}</span>
+        <span class="user-content">{{user.user_name}}</span>
       </li>
-      <li @click="toInfo" class="display-flex line">
-        <span class="add">+</span>
+      <li @click="toInfo" class="line">
+        <span class="add-logo">+</span>
         <span class="add-text">增加一个用户</span>
       </li>
     </ul>
