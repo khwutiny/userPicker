@@ -4,7 +4,7 @@
     <ul>
       <li class="line">
         <span class="info-id">昵称</span>
-        <input class="info-content" v-model="nickName"/>
+        <input class="info-content" v-model="userName"/>
         <span class="info-logo"><em style="visibility: hidden">></em></span>
       </li>
       <li @click="pickerShow('birth')" class="line">
@@ -38,6 +38,7 @@
 <script>
 import TimePicker from '@/components/TimePicker'
 import global_ from '@/components/Golbal'// 引用文件
+import qs from 'qs'
 let dataView = {
   'year': {
     'value': ''
@@ -63,69 +64,37 @@ export default {
       dataView: dataView,
       currentList: [],
       users: global_.users,
-      nickName: '',
-      id: '',
-      index: ''
+      userName: '',
+      id: ''
     }
   },
-  mounted: function () {
-    this.getParams()
+  created: function () {
+    let id = this.$route.query.id
+    const _that = this
+    const apiUrl = `http://127.0.0.1:8080/api/getUserById?id=${id}`
+    this.$http.get(apiUrl).then(function (res) {
+      _that.init(res.data)
+    })
   },
   methods: {
-    getParams () {
-      // 取到路由带过来的参数
-      let id = this.$route.query.id
-      // 将数据放在当前组件的数据内
-      if (id !== '' && id !== undefined) {
-        this.id = id
-        let user = this.getInfoById(id)
-        this.nickName = user.user_name
-        dataView = {
-          'year': {
-            'value': user.birth.split('.')[0]
-          },
-          'month': {
-            'value': user.birth.split('.')[1]
-          },
-          'day': {
-            'value': user.birth.split('.')[2]
-          },
-          'weight': {
-            'value': user.weight
-          },
-          'height': {
-            'value': user.height
-          }
+    init (user) {
+      if (user) {
+        this.id = user.id
+        this.userName = user.userName
+        const _birth = user.birthday
+        if (_birth && _birth.indexOf('.') > -1) {
+          dataView['year'].value = _birth.split('.')[0]
+          dataView['month'].value = _birth.split('.')[1]
+          dataView['day'].value = _birth.split('.')[2]
+        } else {
+          dataView['year'].value = ''
+          dataView['year'].value = ''
+          dataView['year'].value = ''
         }
-      } else {
-        dataView = {
-          'year': {
-            'value': ''
-          },
-          'month': {
-            'value': ''
-          },
-          'day': {
-            'value': ''
-          },
-          'weight': {
-            'value': ''
-          },
-          'height': {
-            'value': ''
-          }
-        }
+        dataView['height'].value = user.height
+        dataView['weight'].value = user.weight
       }
       this.dataView = dataView
-    },
-    getInfoById (id) {
-      const _users = this.users
-      for (let i = 0; i < _users.length; i++) {
-        if (id === _users[i].user_id) {
-          this.index = i
-          return _users[i]
-        }
-      }
     },
     pickerShow (type) {
       this.isTimePickerShow = true
@@ -139,18 +108,17 @@ export default {
       this.isTimePickerShow = false
     },
     setInfoById () {
-      if (this.index === '') {
-        this.index = this.users.length
-        this.id = Math.random()
-      }
-      this.users[this.index] = {
-        user_id: this.id,
-        user_name: this.nickName,
-        sex: 1,
-        birth: `${dataView['year'].value}.${dataView['month'].value}.${dataView['day'].value}`,
+      let userJson = {
+        id: this.id,
+        userName: this.userName,
+        birthday: `${dataView['year'].value}.${dataView['month'].value}.${dataView['day'].value}`,
         weight: dataView['weight'].value,
         height: dataView['height'].value
       }
+      const apiUrl = 'http://127.0.0.1:8080/api/updateUser'
+      this.$http.post(apiUrl, userJson).then(function (res) {
+        console.log(res.data)
+      })
       this.$router.push({
         path: '/user',
         name: 'users'

@@ -2,10 +2,10 @@
   <div class="container">
   <div class="head">选择角色</div>
   <ul>
-      <li v-for="user in users" :key="user.user_id" class="line" @click="toInfo(user)">
-        <span v-if="user.sex == 0" class="icon-nvtouxiang"></span>
-        <span v-else-if="user.sex == 1" class="icon-nantouxiang"></span>
-        <span class="user-content">{{user.user_name}}</span>
+      <li v-for="user in users" :key="user.id" class="line" @click="toInfo(user)">
+        <span v-if="user.userSex == 'female'" class="icon-nvtouxiang"></span>
+        <span v-else-if="user.userSex == 'male'" class="icon-nantouxiang"></span>
+        <span class="user-content">{{user.userName}}</span>
       </li>
       <li @click="toInfo" class="line">
         <span class="add-logo">+</span>
@@ -16,13 +16,19 @@
 </template>
 
 <script>
-import global_ from '@/components/Golbal'// 引用文件
 export default {
   name: 'users',
   data () {
     return {
-      users: global_.users
+      users: []
     }
+  },
+  created: function () {
+    const _that = this
+    const url = 'http://127.0.0.1:8080/api/getUsers'
+    this.$http.get(url).then(function (res) {
+      _that.users = res.data
+    })
   },
   methods: {
     toInfo (user) {
@@ -30,7 +36,7 @@ export default {
         path: '/info',
         name: 'UserInfo',
         query: {
-          id: user.user_id
+          id: user.id
         }
       })
     }
