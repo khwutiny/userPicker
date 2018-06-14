@@ -24,13 +24,21 @@ export default {
     }
   },
   created: function () {
-    const _that = this
-    const url = 'http://127.0.0.1:8080/api/getUsers'
-    this.$http.get(url).then(function (res) {
-      _that.users = res.data
-    })
+    this.getUser()
+  },
+  watch: {
+    'router' () {
+      this.getUser()
+    }
   },
   methods: {
+    getUser () {
+      const _that = this
+      const url = `${this.$API}/getUsers`
+      this.$http.get(url).then(function (res) {
+        _that.users = res.data
+      })
+    },
     toInfo (user) {
       this.$router.push({
         path: '/info',

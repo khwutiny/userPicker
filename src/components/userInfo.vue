@@ -4,7 +4,7 @@
     <ul>
       <li class="line">
         <span class="info-id">昵称</span>
-        <input class="info-content" v-model="userName"/>
+        <input class="info-content" maxlength="12" v-model="userName"/>
         <span class="info-logo"><em style="visibility: hidden">></em></span>
       </li>
       <li @click="pickerShow('birth')" class="line">
@@ -37,7 +37,6 @@
 
 <script>
 import TimePicker from '@/components/TimePicker'
-import global_ from '@/components/Golbal'// 引用文件
 let dataView = {
   'year': {
     'value': ''
@@ -62,20 +61,26 @@ export default {
       isTimePickerShow: false,
       dataView: dataView,
       currentList: [],
-      users: global_.users,
+      users: [],
       userName: '',
       id: ''
     }
   },
   created: function () {
-    let id = this.$route.query.id
-    const _that = this
-    const apiUrl = `http://127.0.0.1:8080/api/getUserById?id=${id}`
-    this.$http.get(apiUrl).then(function (res) {
-      _that.init(res.data)
-    })
+    this.getParas()
+  },
+  watch: {
+    '$route' () {
+      this.getParas()
+    }
   },
   methods: {
+    getParas () {
+      let id = this.$route.query.id
+      const _that = this
+      const apiUrl = `${this.$API}/getUserById?id=${id}`
+      this.$http.get(apiUrl).then(function (res) { _that.init(res.data) })
+    },
     init (user) {
       if (user) {
         this.id = user.id
@@ -114,11 +119,16 @@ export default {
         weight: dataView['weight'].value,
         height: dataView['height'].value
       }
-      const apiUrl = 'http://127.0.0.1:8080/api/updateUser'
-      this.$http.post(apiUrl, userJson).then(function (res) {})
-      this.$router.push({
-        path: '/user',
-        name: 'users'
+      let apiUrl = `${this.$API}/updateUser`
+      if (!this.id) {
+        apiUrl = `${this.$API}/setUser`
+      }
+      const _that = this
+      this.$http.post(apiUrl, userJson).then(function () {
+        _that.$router.push({
+          path: '/user',
+          name: 'users'
+        })
       })
     }
   }
