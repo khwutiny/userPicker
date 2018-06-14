@@ -1,6 +1,12 @@
 <template>
   <div class="container">
     <div class="head">编辑信息</div>
+    <div class="sexChoice">
+      <div class="icon-nan" :class="{'icon-nan-selected' : sex === 'male'}" id="male" @click="setSex('male')"></div>
+      <i class="nan-text">男</i>
+      <div class="icon-nv" :class="{'icon-nv-selected' : sex === 'female'}" id="female" @click="setSex('female')"></div>
+      <i class="nv-text">女</i>
+    </div>
     <ul>
       <li class="line">
         <span class="info-id">昵称</span>
@@ -63,7 +69,8 @@ export default {
       currentList: [],
       users: [],
       userName: '',
-      id: ''
+      id: '',
+      sex: ''
     }
   },
   created: function () {
@@ -87,6 +94,7 @@ export default {
       if (user) {
         this.id = user.id
         this.userName = user.userName
+        this.sex = user.sex
         const _birth = user.birthday
         if (_birth && _birth.indexOf('.') > -1) {
           dataView['year'].value = _birth.split('.')[0]
@@ -101,6 +109,11 @@ export default {
         dataView['weight'].value = user.weight
       }
       this.dataView = dataView
+    },
+    setSex (sex) {
+      if (!this.sex) {
+        this.sex = sex
+      }
     },
     pickerShow (type) {
       this.isTimePickerShow = true
@@ -117,6 +130,7 @@ export default {
       let userJson = {
         id: this.id,
         userName: this.userName,
+        sex: this.sex,
         birthday: `${dataView['year'].value}.${dataView['month'].value}.${dataView['day'].value}`,
         weight: dataView['weight'].value,
         height: dataView['height'].value

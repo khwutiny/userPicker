@@ -15,6 +15,7 @@
 }
 .container ul{
   margin-top: 40px;
+  background:white;
 }
 
 .line{
@@ -24,7 +25,7 @@
   padding: 8px 28px;
 }
 
-.line [class^="icon-"], .add-logo {
+.line [class^="icon-"] {
   font-size: 1.75rem;
   padding: 7px 10px;
 }
@@ -37,16 +38,58 @@
   border: none;
   background: none;
 }
-.add-logo{
-  border:1px solid black;
-  border-radius: 50%;
-  padding: 0;
-  margin:0 7px;
-  width:2rem;
-  height:2rem;
-  line-height:2.15rem;
-  text-align: center;
+.button{
+  display: flex;
+  justify-content: center;
+  padding:1rem 0;
 }
+.add-logo{
+  font-size:2rem;
+  line-height:2rem;
+}
+.sexChoice{
+  margin-top:40px;
+  display: flex;
+  justify-content: center;
+  padding: .75rem;
+}
+.sexChoice i{
+  font-size:1rem;
+  line-height:1rem;
+  margin:10px;
+}
+
+.icon-nan,.icon-nv{
+  font-size:1.5rem;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.icon-nan{
+  color: lightblue;
+  border:2px solid lightblue;
+}
+
+.icon-nv {
+  color: pink;
+  border:2px solid pink;
+}
+.nan-text{
+  color: lightblue;
+}
+.nv-text{
+  color: pink;
+}
+.icon-nan-selected{
+  background:lightblue;
+  color:white;
+}
+.icon-nv-selected{
+  background:pink;
+  color:white;
+}
+
+
 .line .info-id{
   font-size:1.15rem;
   line-height:2rem;
