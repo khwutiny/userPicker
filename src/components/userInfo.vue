@@ -38,7 +38,6 @@
 <script>
 import TimePicker from '@/components/TimePicker'
 import global_ from '@/components/Golbal'// 引用文件
-import qs from 'qs'
 let dataView = {
   'year': {
     'value': ''
@@ -116,9 +115,7 @@ export default {
         height: dataView['height'].value
       }
       const apiUrl = 'http://127.0.0.1:8080/api/updateUser'
-      this.$http.post(apiUrl, userJson).then(function (res) {
-        console.log(res.data)
-      })
+      this.$http.post(apiUrl, userJson).then(function (res) {})
       this.$router.push({
         path: '/user',
         name: 'users'
