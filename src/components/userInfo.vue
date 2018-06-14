@@ -77,9 +77,11 @@ export default {
   methods: {
     getParas () {
       let id = this.$route.query.id
-      const _that = this
-      const apiUrl = `${this.$API}/getUserById?id=${id}`
-      this.$http.get(apiUrl).then(function (res) { _that.init(res.data) })
+      if (id) {
+        const _that = this
+        const apiUrl = `${this.$API}/getUserById?id=${id}`
+        this.$http.get(apiUrl).then(function (res) { _that.init(res.data) })
+      }
     },
     init (user) {
       if (user) {
