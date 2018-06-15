@@ -141,6 +141,11 @@ export default {
       }
       const _that = this
       this.$http.post(apiUrl, userJson).then(function () {
+        _that.$msgBox.showMsgBox({
+          content: '添加用户成功',
+          isShowConfirmBtn: false,
+          isShowCancelBtn: false
+        })
         _that.$router.push({
           path: '/user',
           name: 'users'
