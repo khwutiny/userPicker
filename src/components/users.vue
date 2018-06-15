@@ -2,8 +2,8 @@
   <div class="container">
     <div class="head">选择角色</div>
     <ul>
-      <slide-del v-for="user in users" :key="user.id" @click="toInfo(user)" del-text="删除" @del-click="del(user.id)">
-        <div slot="item" class="line">
+      <slide-del v-for="user in users" :key="user.id"  del-text="删除" @del-click="del(user.id)">
+        <div slot="item" class="line" @click="toInfo(user)">
           <span v-if="user.sex == 'female'" class="icon-nvtouxiang"></span>
           <span v-else-if="user.sex == 'male'" class="icon-nantouxiang"></span>
           <span class="user-content">{{user.userName}}</span>
